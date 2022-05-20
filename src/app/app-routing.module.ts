@@ -8,7 +8,11 @@ const routes: Routes = [
       import('./welcome/welcome.module').then((m) => m.WelcomeModule),
   },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-  { path: 'gameboard', loadChildren: () => import('./game-board/game-board.module').then(m => m.GameBoardModule) },
+  {
+    path: 'gameboard',
+    loadChildren: () =>
+      import('./game-board/game-board.module').then((m) => m.GameBoardModule),
+  },
 ];
 
 @NgModule({

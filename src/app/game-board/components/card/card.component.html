@@ -1,6 +1,10 @@
-<mat-card class="card">
+<mat-card class="card" (click)="open()">
   <div
-    [style.background-image]="'url(' + card.img + ')'"
+    [style]="{
+      'background-image': card.isOpened
+        ? 'url('+card.img+')'
+        : 'url('+constants.Images.Objects.MisteryBox+')'
+    }"
     class="card-image"
   ></div>
 </mat-card>

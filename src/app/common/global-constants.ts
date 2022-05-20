@@ -1,5 +1,9 @@
 export class GlobalConstants {
   public static Images: any = {
+    Objects: {
+      MisteryBox:
+        'https://raw.githubusercontent.com/MGonzalez2489/mario-memory/resources/src/assets/objetos/mystery-box.png',
+    },
     Characters: {
       Mario:
         'https://raw.githubusercontent.com/MGonzalez2489/mario-memory/resources/src/assets/personajes/mario.webp',

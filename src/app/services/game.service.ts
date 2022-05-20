@@ -22,7 +22,7 @@ export class GameService {
       cardsResult.push(newCard);
 
       let shadowCard = new Card();
-      shadowCard.id = newCard.id * 6;
+      shadowCard.id = newCard.id;
       shadowCard.img = newCard.img;
       cardsResult.push(shadowCard);
     }

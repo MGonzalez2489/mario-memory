@@ -1,5 +1,9 @@
 .card {
   height: 100px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 .card-image {
   height: 100%;
