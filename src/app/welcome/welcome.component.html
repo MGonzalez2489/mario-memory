@@ -2,6 +2,6 @@
   <mat-card fxLayout="column" fxLayoutAlign="center center">
     <h1>Bienvenido al memorama de Super Mario Bros</h1>
     <p>Preciona <strong>Iniciar</strong> para comenzar a jugar</p>
-    <a [routerLink]="['/gameboard']" href="javascript;" mat-raised-button color="primary">Iniciar</a>
+    <a (click)="startGate()" [routerLink]="['/gameboard']" href="javascript;" mat-raised-button color="primary">Iniciar</a>
   </mat-card>
 </div>
