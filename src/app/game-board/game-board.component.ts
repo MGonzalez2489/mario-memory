@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { GlobalConstants } from '../common/global-constants';
-import { Card, Game } from '../models';
-import { GameService } from '../services/game.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Card, Game } from '../_shared/models';
+import { GameService } from '../_shared/services/game.service';
 import { StrikePanelComponent } from './components/strike-panel/strike-panel.component';
 
 @Component({
@@ -10,31 +11,43 @@ import { StrikePanelComponent } from './components/strike-panel/strike-panel.com
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.scss'],
 })
-export class GameBoardComponent implements OnInit {
-  cards: Array<Card> = new Array<Card>();
-  evaluationCard: Array<Card> = new Array<Card>();
+export class GameBoardComponent implements OnInit, OnDestroy {
   game: Game = new Game();
+  gameSubscription: Subscription = new Subscription();
   constructor(
     private gService: GameService,
-    private _bottomSheet: MatBottomSheet
+    private _bottomSheet: MatBottomSheet,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
-    this.gService.generateGameCards();
-    this.cards = this.gService.gameCards;
+    this.gameSubscription = this.gService
+      .startGame()
+      .subscribe((game: Game) => {
+        this.game = game;
+      });
+  }
+  ngOnDestroy(): void {
+    this.gameSubscription.unsubscribe();
   }
 
   openedCardEvent(event: Card) {
-    console.log('card opened', event);
-
-    if (this.evaluationCard.length == 0) {
-      this.evaluationCard.push(event);
+    if (!this.gService.hasCardToCompare()) {
+      this.gService.addCardToCompare(event);
       return;
+    }
+
+    if (this.gService.cardsAreEqual(event)) {
+      this.gService.addScorePoint();
+      this.gService.restartCardsToCompare();
     } else {
-      let prevCard = this.evaluationCard[0];
-      if (prevCard.id != event.id) {
-        this.openStrikePanel(prevCard, event);
-      }
+      //strike
+      this.gService.addScoreStrike();
+      this.openStrikePanel(this.gService.cardsToCompare[0], event);
+      this.gService.restartCardsToCompare();
+    }
+    if (this.gService.hasWin()) {
+      alert('ganaste');
     }
   }
 
@@ -43,11 +56,13 @@ export class GameBoardComponent implements OnInit {
       data: { card1, card2 },
     });
     panel.afterDismissed().subscribe((data) => {
+      this.gService.restartCardsToCompare();
+
       card1.isOpened = false;
       card2.isOpened = false;
-
-      this.evaluationCard = new Array<Card>();
-      this.game.strikeCount++;
+      if (this.gService.hasLose()) {
+        alert('perdiste');
+      }
     });
   }
 }

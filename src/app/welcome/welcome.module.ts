@@ -3,17 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { WelcomeRoutingModule } from './welcome-routing.module';
 import { WelcomeComponent } from './welcome.component';
-import {MaterialModule} from '../-material/-material.module';
-
+import { MaterialModule } from '../_material/-material.module';
 
 @NgModule({
-  declarations: [
-    WelcomeComponent
-  ],
-  imports: [
-    CommonModule,
-    WelcomeRoutingModule,
-    MaterialModule
-  ]
+  declarations: [WelcomeComponent],
+  imports: [CommonModule, WelcomeRoutingModule, MaterialModule],
 })
-export class WelcomeModule { }
+export class WelcomeModule {}

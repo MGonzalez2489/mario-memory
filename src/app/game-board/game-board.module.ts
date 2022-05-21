@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { GameBoardRoutingModule } from './game-board-routing.module';
 import { GameBoardComponent } from './game-board.component';
-import { MaterialModule } from '../-material/-material.module';
 import { CardComponent } from './components/card/card.component';
 import { StrikePanelComponent } from './components/strike-panel/strike-panel.component';
+import { MaterialModule } from '../_material/-material.module';
 
 @NgModule({
   declarations: [GameBoardComponent, CardComponent, StrikePanelComponent],

@@ -1,9 +1,10 @@
 <div class="page-container" fxLayout="column" fxLayoutAlign="center center">
   <div class="score">
     <p>Strikes: {{ game.strikeCount }}</p>
+    <p>Score: {{ game.score }}</p>
   </div>
   <div class="game-board">
-    <div *ngFor="let c of cards">
+    <div *ngFor="let c of game.cards">
       <app-card [card]="c" (openedCard)="openedCardEvent($event)"></app-card>
     </div>
   </div>

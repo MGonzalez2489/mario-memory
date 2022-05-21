@@ -1,4 +1,4 @@
-<mat-card class="card" (click)="open()">
+<mat-card class="card" (click)="open()" [@cardFlip]="card.state">
   <div
     [style]="{
       'background-image': card.isOpened
