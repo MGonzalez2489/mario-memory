@@ -40,14 +40,16 @@ export class GameBoardComponent implements OnInit, OnDestroy {
     if (this.gService.cardsAreEqual(event)) {
       this.gService.addScorePoint();
       this.gService.restartCardsToCompare();
+      setTimeout(() => {
+        if (this.gService.hasWin()) {
+          alert('ganaste');
+        }
+      }, 500);
     } else {
       //strike
       this.gService.addScoreStrike();
       this.openStrikePanel(this.gService.cardsToCompare[0], event);
       this.gService.restartCardsToCompare();
-    }
-    if (this.gService.hasWin()) {
-      alert('ganaste');
     }
   }
 
@@ -57,9 +59,8 @@ export class GameBoardComponent implements OnInit, OnDestroy {
     });
     panel.afterDismissed().subscribe((data) => {
       this.gService.restartCardsToCompare();
-
-      card1.isOpened = false;
-      card2.isOpened = false;
+      card1.setClosed();
+      card2.setClosed();
       if (this.gService.hasLose()) {
         alert('perdiste');
       }

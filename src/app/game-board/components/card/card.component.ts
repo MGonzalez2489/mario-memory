@@ -28,7 +28,7 @@ import { Card } from 'src/app/_shared/models';
         })
       ),
       transition('default => flipped', [animate('400ms')]),
-      transition('flipped => default', [animate('200ms')]),
+      transition('flipped => default', [animate('400ms')]),
     ]),
   ],
 })
@@ -45,13 +45,14 @@ export class CardComponent implements OnInit {
 
   ngOnInit(): void {}
   open() {
-    if (this.card.state === 'default') {
-      this.card.state = 'flipped';
-    } else {
-      this.card.state = 'default';
-    }
+    //if (this.card.state === 'default') {
+    //this.card.state = 'flipped';
+    //} else {
+    //this.card.state = 'default';
+    //}
 
-    this.card.isOpened = true;
+    //this.card.isOpened = true;
+    this.card.setOpened();
     this.openedCard.emit(this.card);
   }
 }
