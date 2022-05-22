@@ -3,6 +3,9 @@
     <p>Strikes: {{ game.strikeCount }}</p>
     <p>Score: {{ game.score }}</p>
   </div>
+
+  <button class="" id="btnWin" (click)="instaWin()">Win</button>
+  <button class="" id="btnLose" (click)="instaLose()">Lose</button>
   <div class="game-board">
     <div *ngFor="let c of game.cards">
       <app-card [card]="c" (openedCard)="openedCardEvent($event)"></app-card>

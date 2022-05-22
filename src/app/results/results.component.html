@@ -1,1 +1,27 @@
-<p>results works!</p>
+has win {{ hasWin }}
+
+<div
+  class="page-container pyro"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <div *ngIf="hasWin" fxLayout="column" fxLayoutAlign="center center" class="pyro">
+    <div class="before"></div>
+    <div class="after"></div>
+    <h1>Felicidades, Ganaste</h1>
+    <h3>Score: {{ game.score }}</h3>
+    <h3>Strikes: {{ game.strikeCount }}</h3>
+  </div>
+
+  <div *ngIf="!hasWin">
+    <h1>Ou! Perdiste</h1>
+  </div>
+
+  <a
+    href="javascirpt:;"
+    mat-raised-button
+    color="primary"
+    routerLink="/gameboard"
+    >Jugar de Nuevo</a
+  >
+</div>

@@ -30,7 +30,27 @@ export class GameBoardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.gameSubscription.unsubscribe();
   }
+  instaWin() {
+    this.gService.addScorePoint();
+    this.gService.addScorePoint();
+    this.gService.addScorePoint();
+    this.gService.addScorePoint();
+    this.gService.addScorePoint();
 
+    setTimeout(() => {
+      if (this.gService.hasWin()) {
+        this.route.navigate(['/results']);
+      }
+    }, 500);
+  }
+  instaLose() {
+    this.gService.addScoreStrike();
+    this.gService.addScoreStrike();
+    this.gService.addScoreStrike();
+    if (this.gService.hasLose()) {
+      alert('perdiste');
+    }
+  }
   openedCardEvent(event: Card) {
     if (!this.gService.hasCardToCompare()) {
       this.gService.addCardToCompare(event);
